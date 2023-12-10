@@ -2,8 +2,8 @@ import React from 'react';
 import { useState } from 'react';
 
 import { CgProfile } from "react-icons/cg";
-import { BsArrowUpCircle } from "react-icons/bs";
-import { BsArrowDownCircle } from "react-icons/bs";
+import { FaArrowUp } from "react-icons/fa6";
+import { FaArrowDown } from "react-icons/fa6";
 
 import styled from 'styled-components';
 
@@ -14,7 +14,10 @@ interface QuestionBox {
 }
 
 const BoxContainer = styled.div`
+  background-color: #ede7d5;
+  border-radius: 16px;
   max-width: 80%;
+  padding: 2rem;
 `
 
 const BoxHeader = styled.div`
@@ -32,33 +35,50 @@ const UserArea = styled.div`
 `
 
 const UserImage = styled.span`
-  width: 40px;
+  width: 50%;
   align-items: center;
 `
 
 const Title = styled.h1`
   font-size: 2rem;
   min-width: 200px;
+  color: #545454;
 `
 
 const Text = styled.p`
+  font-size: 1rem;
+  text-align: justify;
+  color: #545454;
 `
 
 const SpanImage = styled.span`
-  width: 40px;
   align-items: center;
 `
 
 const Button = styled.button`
   border: none;
-  border-radius: 8px;
+  box-shadow: 0 0 0 2px #545454;
+  border-radius: 24px;
   align-items: center;
   cursor: pointer;
+  background-color: #8cbfaf;
 `
 
 const SpanVotes = styled.span`
   display: flex;
-  font-size: 1rem
+  padding: 1.5rem;
+  font-size: 1rem;
+  color: #545454;
+`
+
+const OptionsVote = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: nowrap;
+  overflow: hidden;
+  padding: 1rem;
+  justify-content: space-around;
 `
 
 const Options = styled.div`
@@ -68,7 +88,7 @@ const Options = styled.div`
   flex-wrap: nowrap;
   overflow: hidden;
   padding: 1rem;
-  justify-content: space-around;
+  justify-content: flex-start;
 `
 
 const QuestionBox: React.FC<QuestionBox> = ({ userName, title, text }) => {
@@ -90,21 +110,23 @@ const QuestionBox: React.FC<QuestionBox> = ({ userName, title, text }) => {
       <BoxHeader>
         <UserArea>
           <UserImage>
-            <CgProfile/>
+            <CgProfile size={50}/>
           </UserImage>
-          <p>{userName}</p>
+          <Text>{userName}</Text>
         </UserArea>
         <Title>{title}</Title>
       </BoxHeader>
       <Text>{text}</Text>
       <Options>
-        <Button onClick={handleUpvote}>
-          <SpanImage><BsArrowUpCircle/></SpanImage>
-        </Button>
-        <SpanVotes>{voteDifference}</SpanVotes>
-        <Button onClick={handleDownvote}>
-          <SpanImage><BsArrowDownCircle/></SpanImage>
-        </Button>
+        <OptionsVote>
+          <Button onClick={handleUpvote}>
+            <SpanImage><FaArrowUp size={24}/></SpanImage>
+          </Button>
+          <SpanVotes>{voteDifference}</SpanVotes>
+          <Button onClick={handleDownvote}>
+            <SpanImage><FaArrowDown size={24}/></SpanImage>
+          </Button>
+        </OptionsVote>
       </Options>
     </BoxContainer>
   );
